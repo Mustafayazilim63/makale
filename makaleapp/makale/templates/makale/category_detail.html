@@ -1,0 +1,234 @@
+ <html><head><base href="/">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Kategori Detay</title>
+        <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            letter-spacing: 0.3px;
+        }
+        
+        body {
+            padding-bottom: 70px;
+            min-height: 100vh;
+            background-color: #f9f9f9;
+        }
+        
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 16px 20px;
+            background-color: #35423F;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+            color: #FFFFFF;
+        }
+        
+        .category-info {
+            padding: 20px;
+            background-color: #fff;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+        
+        .category-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #35423F;
+            margin-bottom: 8px;
+        }
+        
+        .category-description {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.5;
+        }
+        
+        .search-container {
+            padding: 15px 20px;
+            position: sticky;
+            top: 72px;
+            background-color: #f9f9f9;
+            z-index: 99;
+        }
+        
+        .search-box {
+            width: 100%;
+            padding: 12px 20px;
+            border: 2px solid #3D5A56;
+            border-radius: 25px;
+            font-size: 16px;
+            background-color: #FFFFFF;
+            transition: all 0.3s ease;
+        }
+        
+        .search-box:focus {
+            outline: none;
+            border-color: #2EAB9E;
+            box-shadow: 0 0 10px rgba(46, 171, 158, 0.2);
+        }
+        
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            padding: 10px;
+        }
+        
+        .article-card {
+            background-color: #FFFFFF;
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(61, 90, 86, 0.1);
+            display: flex;
+            flex-direction: column;
+            min-height: 100px;
+            position: relative;
+        }
+        
+        .article-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.12);
+            border-color: #2EAB9E;
+        }
+        
+        .article-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #35423F;
+            margin-bottom: 6px;
+        }
+        
+        .article-excerpt {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.4;
+        }
+        
+        .navbar {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #35423F;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px;
+            box-shadow: 0 -3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #FFFFFF;
+            transition: all 0.2s ease;
+            opacity: 0.9;
+        }
+        
+        .nav-item:hover {
+            transform: translateY(-2px);
+            opacity: 1;
+            color: #2EAB9E;
+        }
+        
+        .nav-icon {
+            font-size: 16px;
+            margin-bottom: 3px;
+        }
+        
+        .nav-text {
+            font-size: 9px;
+            font-weight: 500;
+        }
+        
+        @media screen and (max-width: 480px) {
+            .articles-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+                padding: 8px;
+            }
+            
+            .article-card {
+                padding: 12px;
+                min-height: 90px;
+            }
+        
+            .article-title {
+                font-size: 14px;
+                margin-bottom: 4px;
+            }
+        
+            .article-excerpt {
+                font-size: 12px;
+                line-height: 1.3;
+            }
+        }
+
+        a{
+            text-decoration: none;
+            color: #35423F;
+        }
+        </style>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+        </head>
+        <body>
+        
+        <div class="header">
+            <h1>{{ category.name }}</h1>
+        </div>
+        
+        <div class="category-info">
+            <p class="category-description">{{ category.description }}</p>
+        </div>
+        
+        <div class="search-container">
+            <input type="text" class="search-box" placeholder="{{ category.name }} kategorisinde  ara...">
+        </div>
+        
+        <div class="articles-grid">
+            {% for article in articles %}
+            <div class="article-card">
+                <h2 class="article-title"><a href="{% url 'article_detail' article.id %}">{{ article.title }}</a></h2>
+                <p class="article-excerpt">{{ article.konu }}</p>
+            </div>
+           {% endfor %}
+        </div>
+        
+       
+        <div class="empty-state" style="display: none;">
+            <i class="fas fa-download"></i>
+            <p>Bu kategoride makale bulunmamaktadır...</p>
+            <span>Sonra tekrar göz atın</span>
+        </div>
+        
+        {% include 'makale/navbar.html' %}
+        
+        <script>
+        const searchBox = document.querySelector('.search-box');
+        const articleCards = document.querySelectorAll('.article-card');
+        
+        searchBox.addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            
+            articleCards.forEach(card => {
+                const title = card.querySelector('.article-title').textContent.toLowerCase();
+                const excerpt = card.querySelector('.article-excerpt').textContent.toLowerCase();
+                
+                if (title.includes(searchTerm) || excerpt.includes(searchTerm)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+        </script>
+        
+        </body></html>
+        
+        
+        

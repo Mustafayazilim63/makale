@@ -1,0 +1,88 @@
+<html>
+
+<head>
+    <base href="/">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Makale Okuma</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            letter-spacing: 0.3px;
+        }
+
+        body {
+            padding-bottom: 70px;
+            min-height: 100vh;
+            background-color: #f9f9f9;
+        }
+
+
+
+        .navbar {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #35423F;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px;
+            box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #FFFFFF;
+            transition: all 0.2s ease;
+            opacity: 0.9;
+        }
+
+        .nav-item:hover {
+            transform: translateY(-2px);
+            opacity: 1;
+            color: #2EAB9E;
+        }
+
+        .nav-icon {
+            font-size: 18px;
+            margin-bottom: 3px;
+        }
+
+        .nav-text {
+            font-size: 10px;
+            font-weight: 500;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <a href="{% url 'category_list' %}" class="nav-item">
+            <i class="fas fa-list nav-icon"></i>
+            <span class="nav-text">Kategoriler</span>
+        </a>
+        <a href="{% url 'bugün' %}" class="nav-item">
+            <i class="fas fa-calendar-day nav-icon"></i>
+            <span class="nav-text">Bugün</span>
+        </a>
+        <a href="{% url 'index' %}" class="nav-item">
+            <i class="fas fa-home nav-icon"></i>
+            <span class="nav-text">Ana Sayfa</span>
+        </a>
+        <a href="{% url 'sözlük' %}" class="nav-item">
+            <i class="fas fa-book nav-icon"></i>
+            <span class="nav-text">Sözlük</span>
+        </a>
+        <a href="{% url 'daha' %}" class="nav-item">
+            <i class="fas fa-ellipsis-h nav-icon"></i>
+            <span class="nav-text">Daha</span>
+        </a>
+    </nav>
