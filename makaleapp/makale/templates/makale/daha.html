@@ -1,0 +1,459 @@
+<html><head><base href="/">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daha</title>
+    <style>
+    :root {
+      --base-font-size: 15px;
+    }
+    
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Segoe UI', Arial, sans-serif;
+        letter-spacing: 0.3px;
+    }
+    
+    body {
+        padding-bottom: 70px;
+        min-height: 100vh;
+        background-color: #f9f9f9;
+    }
+    
+    .header {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        padding: 16px 20px;
+        background-color: #35423F;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+        color: #FFFFFF;
+    }
+    
+    .page-container {
+        margin: 20px;
+    }
+    
+    .section {
+        background-color: #fff;
+        border-radius: 15px;
+        padding: 25px;
+        margin-bottom: 20px;
+        box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+    }
+    
+    .menu-category {
+        margin-bottom: 30px;
+    }
+    
+    .category-title {
+        color: #2EAB9E;
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 15px;
+        padding-bottom: 5px;
+        border-bottom: 2px solid #2EAB9E;
+    }
+    
+    .menu-item {
+        background-color: #fff;
+        border-radius: 12px;
+        padding: 15px 20px;
+        margin-bottom: 10px;
+        box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+        cursor: pointer;
+        transition: transform 0.3s ease;
+        display: flex;
+        align-items: center;
+    }
+    
+    .menu-item:hover {
+        transform: translateX(5px);
+        background-color: #f8f8f8;
+    }
+    
+    .menu-item i {
+        font-size: 20px;
+        color: #2EAB9E;
+        margin-right: 15px;
+    }
+    
+    .menu-item-text {
+        color: #35423F;
+        font-size: var(--base-font-size);
+        font-weight: 500;
+    }
+    
+    .section-title {
+        color: #35423F;
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #2EAB9E;
+    }
+    
+    .section-content {
+        color: #666;
+        font-size: var(--base-font-size);
+        line-height: 1.6;
+    }
+    
+    .page {
+        display: none;
+    }
+    
+    .page.active {
+        display: block;
+    }
+    
+    .contact-info {
+        margin-top: 15px;
+    }
+    
+    .contact-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+        color: #35423F;
+    }
+    
+    .contact-icon {
+        margin-right: 10px;
+        color: #2EAB9E;
+    }
+    
+    .navbar {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        background-color: #35423F;
+        display: flex;
+        justify-content: space-around;
+        padding: 10px;
+        box-shadow: 0 -3px 10px rgba(0,0,0,0.1);
+    }
+    
+    .nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-decoration: none;
+        color: #FFFFFF;
+        transition: all 0.2s ease;
+        opacity: 0.9;
+    }
+    
+    .nav-item:hover {
+        transform: translateY(-2px);
+        opacity: 1;
+        color: #2EAB9E;
+    }
+    
+    .nav-icon {
+        font-size: 16px;
+        margin-bottom: 3px;
+    }
+    
+    .nav-text {
+        font-size: 9px;
+        font-weight: 500;
+    }
+    
+    .form-group {
+        margin-bottom: 15px;
+    }
+    
+    .form-control {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        margin-top: 5px;
+        font-size: 14px;
+    }
+    
+    .form-label {
+        color: #35423F;
+        font-size: 14px;
+        margin-bottom: 5px;
+        display: block;
+    }
+    
+    .submit-btn {
+        background-color: #2EAB9E;
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 8px;
+        cursor: pointer;
+        width: 100%;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+    }
+    
+    .submit-btn:hover {
+        background-color: #248f84;
+    }
+    
+    .info-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        margin-top: 20px;
+    }
+    
+    .info-box {
+        background-color: #fff;
+        border-radius: 12px;
+        padding: 20px;
+        text-align: center;
+        box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+        cursor: pointer;
+        transition: transform 0.3s ease;
+    }
+    
+    .info-box:hover {
+        transform: translateY(-5px);
+    }
+    
+    .info-box i {
+        font-size: 24px;
+        color: #2EAB9E;
+        margin-bottom: 10px;
+    }
+    
+    .info-box h3 {
+        color: #35423F;
+        font-size: 16px;
+        margin-bottom: 5px;
+    }
+    
+    @media screen and (max-width: 480px) {
+        .page-container {
+            margin: 15px;
+        }
+        
+        .section {
+            padding: 20px;
+        }
+    }
+
+        .icon {
+            transform: scale(1.1);
+            color: #2EAB9E;
+            padding: 16px 20px;
+            gap: 15px;
+            font-size: x-large;
+        }
+
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    </head>
+    <body>
+    
+    <div class="header">
+        <h1>Daha</h1>
+    </div>
+
+    <div class="page-container">
+        <!-- Ana menü -->
+        <div id="mainPage" class="page active">
+            <div class="menu-category">
+                <h2 class="category-title">Kurumsal</h2>
+                <div class="menu-item" onclick="showPage('aboutUs')">
+                    <i class="fas fa-users"></i>
+                    <span class="menu-item-text">Biz Kimiz</span>
+                </div>
+                <div class="menu-item" onclick="showPage('contact')">
+                    <i class="fas fa-envelope"></i>
+                    <span class="menu-item-text">İletişim</span>
+                </div>
+                <div class="menu-item" onclick="showPage('yenilikler')">
+                    <i class="fas fa-lightbulb"></i>
+                    <span class="menu-item-text">Yenilikler</span>
+                </div>
+                <div class="menu-item" onclick="showPage('idea')">
+                    <i class="fas fa-lightbulb"></i>
+                    <span class="menu-item-text">Bir Fikrim Var</span>
+                </div>
+            </div>
+    
+            <div class="menu-category">
+                <h2 class="category-title">Yasal</h2>
+                <div class="menu-item" onclick="showPage('terms')">
+                    <i class="fas fa-file-contract"></i>
+                    <span class="menu-item-text">Kullanıcı Sözleşmesi</span>
+                </div>
+                <div class="menu-item" onclick="showPage('privacy')">
+                    <i class="fas fa-shield-alt"></i>
+                    <span class="menu-item-text">Gizlilik Politikası</span>
+                </div>
+                <div class="menu-item" onclick="showPage('cookies')">
+                    <i class="fas fa-cookie"></i>
+                    <span class="menu-item-text">Çerez Politikası</span>
+                </div>
+            </div>
+    
+            <div class="menu-category">
+                <h2 class="category-title">Yardım</h2>
+                <div class="menu-item" onclick="showPage('faq')">
+                    <i class="fas fa-question-circle"></i>
+                    <span class="menu-item-text">Sıkça Sorulan Sorular</span>
+                </div>
+                <div class="menu-item" onclick="showPage('rules')">
+                    <i class="fas fa-gavel"></i>
+                    <span class="menu-item-text">Topluluk Kuralları</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+     <!-- Biz kimiz -->
+<div id="aboutUs" class="page">
+    <a class="icon" href="{% url 'daha' %}"><i class="fas fa-arrow-left home-icon"></i></a>
+    <div class="section">
+        <h2 class="section-title">Biz Kimiz?</h2>
+
+        <div class="section-content">
+            Bilgi paylaşımını ve kişisel gelişimi destekleyen bir platformuz. Amacımız, kullanıcılarımıza değerli içerikler sunarak günlük hayatlarına katkıda bulunmaktadır. Sürekli gelişen ve büyüyen bir ekip olarak, en iyi deneyimi sunmak için çalışıyoruz.
+        </div>
+    </div>
+</div>
+
+<!-- Kulanıcı sözleşmesi -->
+<div id="terms" class="page">
+    <a class="icon" href="{% url 'daha' %}"><i class="fas fa-arrow-left home-icon"></i></a>
+    <div class="section">
+        <h2 class="section-title">Kullanıcı Sözleşmesi</h2>
+        <div class="section-content">
+            Bu uygulama kullanıcılarına günlük bilgi ve ilham verici içerikler sunmayı amaçlamaktadır. Uygulamayı kullanarak, belirlenen kullanım şartlarını kabul etmiş sayılırsınız. İçeriklerin telif hakları saklıdır ve izinsiz kullanılamaz.
+        </div>
+    </div>
+</div>
+
+<!--iletişim -->
+<div id="contact" class="page">
+    <a class="icon" href="{% url 'daha' %}"><i class="fas fa-arrow-left home-icon"></i></a>
+    <div class="section">
+        <h2 class="section-title">İletişim</h2>
+        <div class="section-content">
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-envelope contact-icon"></i>
+                    info@example.com
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone contact-icon"></i>
+                    +90 555 123 4567
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt contact-icon"></i>
+                    Şanlıurfa, Türkiye
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Yenilikler -->
+<div id="yenilikler" class="page">
+    <a class="icon" href="{% url 'daha' %}"><i class="fas fa-arrow-left home-icon"></i></a>
+    <div class="section">
+        <h2 class="section-title">Yenilikler</h2>
+        <div class="section-content">
+            <ul>
+                {% for daha_yenilik in dahay %}
+                <li> {{ daha_yenilik.yenilik }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- Bir fikrim var -->
+<div id="idea" class="page">
+    <a class="icon" href="{% url 'daha' %}"><i class="fas fa-arrow-left home-icon"></i></a>
+    <div class="section">
+        <h2 class="section-title">Bir Fikrim Var</h2>
+        <div class="section-content">
+            <form id="ideaForm">
+                <div class="form-group">
+                    <label class="form-label">Ad Soyad</label>
+                    <input type="text" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Fikriniz</label>
+                    <textarea class="form-control" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Gönder</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Privacy Page -->
+<div id="privacy" class="page">
+    <a class="icon" href="{% url 'daha' %}"><i class="fas fa-arrow-left home-icon"></i></a>
+    <div class="section">
+        <h2 class="section-title">Gizlilik Politikası</h2>
+        <div class="section-content">
+            Bu uygulama, kullanıcıların kişisel verilerini korumayı öncelikli olarak görmektedir. Toplanan veriler, sadece uygulama içi deneyimi iyileştirmek amacıyla kullanılır ve asla üçüncü parti şirketlerle paylaşılmaz.
+        </div>
+    </div>
+</div>
+
+
+    <!-- Cookies Page -->
+<div id="cookies" class="page">
+    <a class="icon" href="{% url 'daha' %}"><i class="fas fa-arrow-left home-icon"></i></a>
+    <div class="section">
+        <h2 class="section-title">Çerez Politikası</h2>
+        <div class="section-content">
+            Bu uygulama, kullanıcıların deneyimini iyileştirmek için çerezleri kullanmaktadır. Çerezler, kullanıcıların tercihlerini ve geçmiş aktivitelerini hatırlamak için kullanılır.
+        </div>
+    </div>
+</div>
+
+<!-- Sıkça sorulan sorular -->
+<div id="faq" class="page">
+    <a class="icon" href="{% url 'daha' %}"><i class="fas fa-arrow-left home-icon"></i></a>
+    <div class="section">
+        <h2 class="section-title">Sıkça Sorulan Sorular</h2>
+        <div class="section-content">
+            <ul>
+                {% for daha_sorular in dahas %}
+                <li> {{ daha_sorular.sorular }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- Topluluk kuraları -->
+<div id="rules" class="page">
+    <a class="icon" href="{% url 'daha' %}"><i class="fas fa-arrow-left home-icon"></i></a>
+    <div class="section">
+        <h2 class="section-title">Topluluk Kuralları</h2>
+        <div class="section-content">
+            Topluluk içinde saygılı ve nezih bir dil kullanınız. Spam veya reklam içerikli paylaşımlar yapılmamalıdır. Uygulama içi aktiviteleri, topluluk kurallarına uygun olarak gerçekleştirmeye özen gösteriniz.
+        </div>
+    </div>
+</div>
+
+
+
+{% include 'makale/navbar.html' %}
+   
+    
+    <script>function showPage(pageId) {
+      document.querySelectorAll('.page').forEach(page => {
+        page.classList.remove('active');
+      });
+      document.getElementById(pageId).classList.add('active');
+    }
+   
+    </script>
+    
+    </body></html>

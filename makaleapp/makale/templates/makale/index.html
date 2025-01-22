@@ -1,0 +1,352 @@
+<html>
+
+<head>
+    <base href="/">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Makale Okuma</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            letter-spacing: 0.3px;
+
+        }
+
+        body {
+            padding-bottom: 70px;
+            min-height: 100vh;
+            background-color: #f9f9f9;
+        }
+
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            padding: 16px 20px;
+            background-color: #35423F;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+            color: #FFFFFF;
+        }
+
+        .logo {
+            width: 40px;
+            height: 40px;
+            background-color: #2EAB9E;
+            border-radius: 50%;
+            margin-right: 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .header h1 {
+            font-size: 22px;
+            font-weight: 600;
+        }
+
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            padding: 15px;
+        }
+
+        .category-box {
+            padding: 15px;
+            background-color: #3D5A56;
+            border-radius: 10px;
+            text-align: center;
+            color: #FFFFFF;
+            font-weight: 500;
+            font-size: 14px;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .category-box:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            background-color: #2EAB9E;
+        }
+
+        .section-title {
+            padding: 15px 20px;
+            font-size: 20px;
+            font-weight: 600;
+            color: #35423F;
+            letter-spacing: 0.5px;
+        }
+
+        .articles {
+            display: flex;
+            overflow-x: auto;
+            padding: 15px;
+            gap: 15px;
+            scrollbar-width: thin;
+            scrollbar-color: #3D5A56 #f1f1f1;
+        }
+
+        .articles::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .articles::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .articles::-webkit-scrollbar-thumb {
+            background: #3D5A56;
+            border-radius: 10px;
+        }
+
+        .article-box {
+            min-width: 180px;
+            height: 180px;
+            background-color: #FFFFFF;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(61, 90, 86, 0.1);
+            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .article-box:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12);
+            border-color: #2EAB9E;
+        }
+
+        .favorite-icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: #ccc;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .favorite-icon:hover {
+            color: #ff4444;
+        }
+
+        .favorite-icon.active {
+            color: #ff4444;
+        }
+
+        .article-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #000000;
+            font-size: 15px;
+            line-height: 1.4;
+            padding-right: 25px;
+        }
+
+        .article-topic {
+            color: #2EAB9E;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .navbar {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #35423F;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px;
+            box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #FFFFFF;
+            transition: all 0.2s ease;
+            opacity: 0.9;
+        }
+
+        .nav-item:hover {
+            transform: translateY(-2px);
+            opacity: 1;
+            color: #2EAB9E;
+        }
+
+        .nav-icon {
+            font-size: 18px;
+            margin-bottom: 3px;
+        }
+
+        .nav-text {
+            font-size: 10px;
+            font-weight: 500;
+        }
+
+        .slider-container {
+            width: 90%;
+            max-width: 800px;
+            overflow: hidden;
+            position: relative;
+            justify-content: center;
+            margin: 10px;
+            border: 2px solid #ddd;
+            border-radius: 15px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .slider {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slide {
+            min-width: 100%;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-size: cover;
+            background-position: center;
+            font-size: 24px;
+            color: #000000;
+            background-color: #ddd;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+
+    <div class="header">
+        <div class="logo"></div>
+        <h1>Ana Sayfa</h1>
+    </div>
+
+    <div style="display: flex; justify-content: center;">
+        <div class="slider-container">
+            <div class="slider">
+                {% for afiş in afişler %}
+                <div class="slide">{{ afiş.afiş_ad }}</div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+
+    <div class="categories">
+        {% for category in categories|slice:":4" %}
+        <div class="category-box"><a style="text-decoration: none; color: rgb(255, 255, 255);"
+                href="{% url 'category_detail' category.id %}">{{ category.name }}</a></div>
+        {% endfor %}
+    </div>
+
+    {% for category in categories %}
+    <div class="section-title">{{ category.name }}</div>
+    <div class="articles">
+        {% for article in category.articles.all|slice:":6" %}
+        <div class="article-box">
+            <div class="article-title"><a style="text-decoration: none; color: black;"
+                    href="{% url 'article_detail' article.id %}">{{ article.title }}</a></div>
+            <div class="article-topic">{{ article.konu }}</div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endfor %}
+
+    {% include 'makale/navbar.html' %}
+
+    <script>
+        document.querySelectorAll('.favorite-icon').forEach(icon => {
+            icon.addEventListener('click', function () {
+                this.classList.toggle('active');
+            });
+        });
+    </script>
+    <script>
+        const slider = document.querySelector('.slider');
+        const slides = document.querySelectorAll('.slide');
+        let currentIndex = 0;
+        let startX = 0;
+        let isDragging = false;
+        let currentTranslate = 0;
+        let previousTranslate = 0;
+
+        // Dokunma başlangıcı
+        slider.addEventListener('mousedown', startDrag);
+        slider.addEventListener('touchstart', startDrag);
+
+        // Dokunma hareketi
+        slider.addEventListener('mousemove', dragMove);
+        slider.addEventListener('touchmove', dragMove);
+
+        // Dokunma bitişi
+        slider.addEventListener('mouseup', endDrag);
+        slider.addEventListener('mouseleave', endDrag);
+        slider.addEventListener('touchend', endDrag);
+
+        // Otomatik kaydırma işlemi
+        function autoSlide() {
+            currentIndex = (currentIndex + 1) % slides.length;
+            updateSlidePosition();
+        }
+
+        // Otomatik kaydırmayı başlat
+        const interval = setInterval(autoSlide, 3000);
+
+        function startDrag(e) {
+            isDragging = true;
+            startX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
+            previousTranslate = currentTranslate;
+            slider.style.transition = 'none';
+        }
+
+        function dragMove(e) {
+            if (!isDragging) return;
+            const currentX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
+            const diff = currentX - startX;
+            currentTranslate = previousTranslate + diff;
+            slider.style.transform = `translateX(${currentTranslate}px)`;
+        }
+
+        function endDrag() {
+            isDragging = false;
+
+            // Hangi slayta yakın olduğumuzu belirleyelim
+            const slideWidth = slider.offsetWidth;
+            currentIndex = Math.round(-currentTranslate / slideWidth);
+
+            // Aralığın dışına çıkmayı önle
+            if (currentIndex < 0) currentIndex = 0;
+            if (currentIndex >= slides.length) currentIndex = slides.length - 1;
+
+            updateSlidePosition();
+        }
+
+        function updateSlidePosition() {
+            currentTranslate = -currentIndex * slider.offsetWidth;
+            slider.style.transition = 'transform 0.5s ease-in-out';
+            slider.style.transform = `translateX(${currentTranslate}px)`;
+        }
+    </script>
+
+</body>
+
+</html>
